@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  proxy:
+    build: ./proxy
+    ports:
+      - "9090:9090"
+    depends_on:
+      - app
+    networks:
+      - ctf-net
+  app:
+    build: ./app
+    environment:
+      - JWT_SECRET=${JWT_SECRET}
+      - ADMIN_FLAG=${ADMIN_FLAG}
+      - BOT_SHARED_TOKEN=${BOT_SHARED_TOKEN}
+      - INSTANCE_ID=${INSTANCE_ID}
+      - BOT_INTERNAL_URL=http://proxy:7070
+
+    networks:
+      - ctf-net
+  bot:
+    build: ./bot
+    depends_on:
+      - proxy
+    network_mode: "service:proxy"
+    environment:
+      - JWT_SECRET=${JWT_SECRET}
+      - BOT_SHARED_TOKEN=${BOT_SHARED_TOKEN}
+      - BASE_URL=http://127.0.0.1
+      - ADMIN_JWT=${ADMIN_JWT}
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:7070/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  ctf-net:
+    driver: bridge
