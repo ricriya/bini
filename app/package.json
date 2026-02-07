@@ -1,0 +1,14 @@
+{
+  "name": "ctf-my-binih-bot",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "playwright": "1.58.0"
+  }
+}
