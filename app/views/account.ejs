@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/public/style.css" />
+  <title>My Account</title>
+
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner wrap">
+      <div class="brand">MyAccount</div>
+      <div class="muted small">Cari Bini Admin
+      </div>
+      <form method="post" action="/logout">
+        <button class="btn ghost" type="submit">Logout</button>
+      </form>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <audio id="bgMusic" loop>
+      <source src="/public/music.mp3" type="audio/mpeg">
+    </audio>
+    <section class="grid">
+      <div class="card" style="width: 65vw;">
+        <h2>Profil</h2>
+
+        <dl class="kv">
+          <div>
+            <dt>Nama</dt>
+            <dd>
+              <%= profile.nama %>
+            </dd>
+          </div>
+          <div>
+            <dt>ID</dt>
+            <dd>
+              <%= profile.id %>
+            </dd>
+          </div>
+          <div>
+            <dt>Umur</dt>
+            <dd>
+              <%= profile.umur %>
+            </dd>
+          </div>
+          <div>
+            <dt>Alamat</dt>
+            <dd>
+              <%= profile.alamat %>
+            </dd>
+          </div>
+          <div>
+            <dt>Nama pacar gweh</dt>
+            <dd class="highlight">
+              <%= profile.pacar %>
+            </dd>
+          </div>
+        </dl>
+
+        <div class="hr"></div>
+        <div class="card" style="margin-top: 10vh;width: 100%;">
+          <h2>surat cinta dari bini gweeh nih </h2>
+          <p class="muted">
+            mbacanya diresapin banget yah , tapi jangan di share pliss takut ketahuan dosen
+          </p>
+          <a class="btn" href="/resource/surat">surat cinta</a>
+          <br>
+          <br>
+          <h2>Gambar my bini gwehh </h2>
+          <p> Dia kelihatan kalem, tatapannya lembut.Tapi di balik senyumnya ada bahaya yang bikin jantung deg-deg-an.
+            Dan gak tau kenapa, justru itu yang bikin dia kelihatan paling cantik.lihat nya jangan lama lama ya takut
+            dimarahin, btw aku ingin lihat juga gambar binih admin 😋</p>
+        </div>
+    </section>
+    <main class="wrap">
+      <div class="bini-container">
+        <a href="/myaccount/resource/bini1.png" target="_blank" class="card-3d-wrapper">
+          <div class="card-3d" data-image="/public/1.png">
+            <div class="card-3d-overlay">
+              <div class="overlay-content">
+                <div class="btn-click">Lihat Full</div>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="/myaccount/resource/bini2.png" target="_blank" class="card-3d-wrapper">
+          <div class="card-3d" data-image="/public/2.png">
+            <div class="card-3d-overlay">
+              <div class="overlay-content">
+                <div class="btn-click">Lihat Full</div>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="/myaccount/resource/bini3.png" target="_blank" class="card-3d-wrapper">
+          <div class="card-3d" data-image="/public/3.png">
+            <div class="card-3d-overlay">
+              <div class="overlay-content">
+                <div class="btn-click">Lihat Full</div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </main>
+    <section class="grid">
+      <div class="card" style="width: 65vw;">
+        <div class="card" style="width: 100%;">
+          <h2>Kirimin Admin Link</h2>
+          <p class="muted">
+            kirim link ke admin biar dia buka , tapi jangan kirim aneh aneh ya 😇
+          </p>
+          <a class="btn" href="/myaccount/bot">Buka halaman</a>
+        </div>
+    </section>
+
+
+  </main>
+  <script>
+    function viewResource(filename) {
+      const userId = "<%= profile.id %>";
+      const targetUrl = `/myaccount/resource/${filename}`;
+      fetch(targetUrl, {
+        method: 'GET',
+        headers: {
+          'X-User-ID': userId
+        }
+      })
+        .then(response => {
+          if (response.ok) {
+
+            window.open(targetUrl, '_blank');
+          } else {
+            alert("Gagal memicu : " + response.statusText);
+          }
+        })
+        .catch(err => alert("Error: " + err.message));
+    }
+  </script>
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const mainkan = confirm("Klik aja dulu biar makin asik 🔊");
+        if (mainkan) {
+          const audio = document.getElementById('bgMusic');
+          audio.play().catch(err => {
+            console.log("Autoplay diblokir, butuh interaksi manual.");
+          });
+        }
+      }, 500);
+    });
+  </script>
+<script>
+  document.querySelectorAll('.card-3d').forEach(card => {
+    card.style.backgroundImage = `url(${card.dataset.image})`;
+    card.addEventListener('mousemove', (e) => {
+      
+      const rect = card.getBoundingClientRect();
+      
+      const x = e.clientX - rect.left; 
+      const y = e.clientY - rect.top; 
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = (centerY - y) / 10; 
+      const rotateY = (x - centerX) / 10;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+    });
+  });
+</script>
+</body>
+
+</html>

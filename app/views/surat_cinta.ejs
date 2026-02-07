@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat dari Reze | <%= title %>
+    </title>
+    <style>
+        :root {
+            --bg: #05070a;
+            --text: #e9ecf3;
+            --muted: #a7b0c4;
+            --accent: #28ff9e;
+            /* Warna pink/merah khas Reze */
+            --accent2: #6ee7b7;
+            --border: rgba(255, 255, 255, 0.1);
+            --radius: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background:
+                linear-gradient(rgba(5, 7, 10, 0.8), rgba(5, 7, 10, 0.8)),
+                url('/public/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .letter-container {
+            width: 100%;
+            max-width: 700px;
+            perspective: 1000px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .letter-card {
+            background: rgba(11, 16, 32, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 50px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Garis estetika di pinggir surat */
+        .letter-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+        }
+
+        .letter-header {
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+
+        .letter-header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .letter-body {
+            font-family: 'Georgia', serif;
+            /* Font agar terasa seperti surat fisik */
+            line-height: 2;
+            font-size: 1.15rem;
+            color: rgba(233, 236, 243, 0.9);
+            text-align: justify;
+            white-space: pre-line;
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 15px;
+        }
+
+        /* Styling scrollbar agar tidak merusak estetika */
+        .letter-body::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .letter-body::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 10px;
+        }
+
+        .letter-footer {
+            margin-top: 40px;
+            text-align: right;
+        }
+
+        .signature {
+            font-size: 1.8rem;
+            font-family: 'Brush Script MT', cursive;
+            color: var(--accent);
+            display: block;
+            margin-top: 10px;
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-top: 30px;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            border-bottom: 1px dashed var(--muted);
+        }
+
+        .btn-back:hover {
+            color: var(--accent2);
+            border-color: var(--accent2);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .letter-card {
+                padding: 30px;
+            }
+
+            .letter-body {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="letter-container">
+        <div class="letter-card">
+            <div class="letter-header">
+                <h1>Untuk Player</h1>
+                <p style="color: var(--muted); font-size: 0.8rem; margin: 5px 0 0 0;">
+                    Di bawah langit malam yang penuh kembang api
+                </p>
+            </div>
+
+            <div class="letter-body">
+                Aku nggak pandai nulis surat.
+                Biasanya aku cuma ninggalin jejak… atau ledakan.
+                Jadi kalau tulisanku berantakan, anggap aja ini latihan jadi orang normal.
+
+                Aku sering bohong.
+                Soal siapa aku, dari mana aku datang, dan apa yang aku mau.
+                Tapi waktu aku bilang aku nyaman sama kamu—
+                itu satu-satunya hal yang nggak aku karang.
+
+                Aku suka momen kecil.
+                Suara hujan.
+                Bau besi di stasiun.
+                Cara kamu diam tapi tetap tinggal.
+                Hal-hal sederhana yang harusnya nggak penting…
+                tapi entah kenapa, waktu bareng kamu, semuanya terasa nyata.
+
+                Aku ini berbahaya.
+                Kalau kamu terlalu dekat, kamu bisa terluka.
+                Aku tahu itu.
+                Makanya aku sering ingin pergi duluan, sebelum kamu lihat sisi aku yang paling buruk.
+
+                Tapi jujur ya—
+                kalau ada satu dunia di mana aku boleh memilih,
+                aku ingin hidup pelan.
+                Bangun pagi tanpa misi.
+                Pulang tanpa darah di tangan.
+                Dan kalau bisa… duduk di samping kamu, tanpa pura-pura.
+
+                Aku nggak janji masa depan.
+                Aku cuma janji satu hal:
+                perasaan ini bukan kebohongan.
+
+                Kalau suatu hari aku menghilang,
+                tolong jangan benci aku.
+                Ingat aja, di antara semua peran yang pernah aku mainkan—
+                rasa ini yang paling dekat dengan kebenaran.
+            </div>
+
+            <div class="letter-footer">
+                <p style="margin:0; color: var(--muted);">Teriring ledakan rindu,</p>
+                <span class="signature">Reze</span>
+            </div>
+
+            <a href="/myaccount" class="btn-back">← Kembali ke Dashboard</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

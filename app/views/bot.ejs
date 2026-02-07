@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/public/style.css" />
+  <title>Kirim Admin</title>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner wrap">
+      <div class="brand">Kirim Admin</div>
+      <a class="btn ghost" href="/myaccount">Kembali</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <h1>Kirim link ke admin</h1>
+      <p class="muted">Kirim link ke admin agar dibuka sama admin</code></p>
+
+      <% if (message) { %>
+        <div class="notice"><%= message %></div>
+      <% } %>
+
+      <form method="post" action="/myaccount/bot" class="row">
+        <input class="input" name="path" placeholder="" autocomplete="off" required />
+        <button class="btn" type="submit">Kirim</button>
+      </form>
+
+      <div class="hr"></div>
+    </section>
+  </main>
+</body>
+</html>
